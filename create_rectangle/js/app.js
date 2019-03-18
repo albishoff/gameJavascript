@@ -10,18 +10,25 @@ let score = 0;
 let isGameStarted = false;
 
 $start.addEventListener('click', startGame);
-
 $game.addEventListener('click', handleBoxClick);
+$gameTime.addEventListener('input', setGameTime);
+
+function show($el) {
+	$el.classList.remove('hide');
+}
+
+function hide($el) {
+	$el.classList.add('hide');
+}
 
 function startGame() {
 	score = 0;
 	setGameTime();
-	$timeHeader.classList.remove('hide');
-	$resultHeader.classList.add('hide');
+	$gameTime.setAttribute('disabled', 'true');
 
 	isGameStarted = true;
 	$game.style.backgroundColor = '#fff';
-	$start.classList.add('hide');
+	hide($start);
 
 	let interval = setInterval(function() {
 		let time = parseFloat($time.textContent);
@@ -42,18 +49,22 @@ function setGameScore() {
 }
 
 function setGameTime() {
-	let time = $gameTime;
-	$time.textContent = time.value;
+	let time = +$gameTime.value;
+	$time.textContent = time.toFixed(1);
+
+	show($timeHeader);
+	hide($resultHeader);
 }
 
 function engGame() {
 	isGameStarted = false;
 	setGameScore();
-	$start.classList.remove('hide');
+	$gameTime.removeAttribute('disabled');
+	show($start);
 	$game.innerHTML = '';
 	$game.style.backgroundColor = '#ccc';
-	$timeHeader.classList.add('hide');
-	$resultHeader.classList.remove('hide');
+	hide($timeHeader);
+	show($resultHeader);
 }
 
 function handleBoxClick(event) {
