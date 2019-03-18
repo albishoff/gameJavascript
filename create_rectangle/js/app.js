@@ -1,23 +1,47 @@
 let $start = document.querySelector('#start');
 let $game = document.querySelector('#game');
+let $time = document.querySelector('#time');
 
 let score = 0;
+let isGameStarted = false;
 
-$start.addEventListener('click', () => {
-	console.log('start');
+$start.addEventListener('click', startGame);
+
+$game.addEventListener('click', handleBoxClick);
+
+function startGame() {
+	isGameStarted = true;
+	$game.style.backgroundColor = '#fff';
 	$start.classList.add('hide');
 
-	$game.style.backgroundColor = '#fff';
+	let interval = setInterval(function() {
+		let time = parseFloat($time.textContent);
+
+		if (time <= 0) {
+			clearInterval(interval);
+			engGame();
+		} else {
+			$time.textContent = (time - 0.1).toFixed(1);
+		}
+	}, 100);
 
 	renderBox();
-});
+}
 
-$game.addEventListener('click', event => {
+function engGame() {
+	isGameStarted = false;
+}
+
+function handleBoxClick(event) {
+	if (!isGameStarted) {
+		return;
+	}
+
 	if (event.target.dataset.box) {
 		score++;
 		renderBox();
 	}
-});
+}
 
 function renderBox() {
 	$game.innerHTML = '';
