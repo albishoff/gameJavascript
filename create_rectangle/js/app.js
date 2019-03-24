@@ -89,7 +89,7 @@ function renderBox() {
 
 	box.style.height = box.style.width = boxSize + 'px'
 	box.style.position = 'absolute'
-	box.style.backgroundColor = '#000'
+	box.style.backgroundColor = changeColor(getRandom(0, 7))
 	box.style.top = getRandom(0, maxTop) + 'px'
 	box.style.left = getRandom(0, maxLeft) + 'px'
 	box.style.cursor = 'pointer'
@@ -100,4 +100,33 @@ function renderBox() {
 
 function getRandom(min, max) {
 	return Math.floor(Math.random() * (max - min) + min)
+}
+
+function changeColor(num) {
+	switch (num) {
+		case 0:
+			return 'yellow'
+			break
+		case 1:
+			return 'red'
+			break
+		case 2:
+			return 'green'
+			break
+		case 3:
+			return 'purple'
+			break
+		case 4:
+			return 'gray'
+			break
+		case 5:
+			return 'blue'
+			break
+		case 6:
+			return 'orange'
+			break
+		case 7:
+			return '#000'
+			break
+	}
 }
