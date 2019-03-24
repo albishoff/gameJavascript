@@ -6,6 +6,20 @@ let $timeHeader = document.querySelector('#time-header')
 let $resultHeader = document.querySelector('#result-header')
 let $gameTime = document.querySelector('#game-time')
 
+let colors = [
+	'#CB356B',
+	'#BD3F32',
+	'#3A1C71',
+	'#D76D77',
+	'#283c86',
+	'#45a247',
+	'#8e44ad',
+	'#155799',
+	'#159957',
+	'#000046',
+	'#1CB5E0',
+	'#2F80ED',
+]
 let score = 0
 let isGameStarted = false
 
@@ -89,7 +103,7 @@ function renderBox() {
 
 	box.style.height = box.style.width = boxSize + 'px'
 	box.style.position = 'absolute'
-	box.style.backgroundColor = changeColor(getRandom(0, 7))
+	box.style.backgroundColor = changeColor(colors, getRandom(0, colors.length))
 	box.style.top = getRandom(0, maxTop) + 'px'
 	box.style.left = getRandom(0, maxLeft) + 'px'
 	box.style.cursor = 'pointer'
@@ -102,31 +116,6 @@ function getRandom(min, max) {
 	return Math.floor(Math.random() * (max - min) + min)
 }
 
-function changeColor(num) {
-	switch (num) {
-		case 0:
-			return 'yellow'
-			break
-		case 1:
-			return 'red'
-			break
-		case 2:
-			return 'green'
-			break
-		case 3:
-			return 'purple'
-			break
-		case 4:
-			return 'gray'
-			break
-		case 5:
-			return 'blue'
-			break
-		case 6:
-			return 'orange'
-			break
-		case 7:
-			return '#000'
-			break
-	}
+function changeColor(arr, num) {
+	return arr[num]
 }
